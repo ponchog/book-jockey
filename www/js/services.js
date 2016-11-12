@@ -53,7 +53,7 @@ angular.module('app.services', [])
 //     };
 // }])
 
-.service('TodoService', function ($http, Backand) {
+.service('UsersService', function ($http, Backand) {
   var baseUrl = '/1/objects/';
   var objectName = 'users/';
  

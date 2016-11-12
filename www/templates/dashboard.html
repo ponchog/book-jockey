@@ -7,19 +7,17 @@
       </ion-item>
     </ion-list>
     <div id="dashboard-button-bar1" class="button-bar">
-      <button id="dashboard-button4" style="border-radius:0px 0px 0px 0px;" class="button button-positive">Need</button>
-      <button id="dashboard-button5" style="border-radius:0px 0px 0px 0px;" class="button button-positive">Have</button>
+      <button id="dashboard-need-btn" ng-click="showOnlyNeed()" style="background-color:#84b3ff;border-radius:0px 0px 0px 0px;" class="button button-positive">Need</button>
+      <button id="dashboard-have-btn" ng-click="showOnlyHave()" style="border-radius:0px 0px 0px 0px;" class="button button-positive">Have</button>
     </div>
     <ion-list id="dashboard-list2">
-      <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item4" ui-sref="tabsController.bookDetail">
-        <h2>Title</h2>
-        <p style="white-space:normal;">Line 2</p>
-        <i class="icon ion-alert"></i>
-      </ion-item>
-      <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item5">
-        <h2>Item</h2>
-        <i class="icon ion-wifi"></i>
-      </ion-item>
+      <div ng-repeat="book in books">
+        <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item{{book.id}}" ui-sref="tabsController.bookDetail">
+          <h2>{{book.title}}</h2>
+          <p style="white-space:normal;">{{book.author}}</p>
+          <i class="icon ion-ios-book"></i>
+        </ion-item>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

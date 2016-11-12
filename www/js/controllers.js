@@ -11,16 +11,16 @@ function ($scope, $stateParams) {
 .controller('dashboardCtrl', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, TodoService) {
+function ($scope, $stateParams, UsersService) {
     console.log('He!');
-    console.log(TodoService);
+    console.log(UsersService);
 
     $scope.todos = [];
     $scope.input = {};
 
     function getAllTodos() {
         console.log('1');
-        TodoService.getTodos()
+        UsersService.getTodos()
         .then(function (result) {
           $scope.todos = result.data.data;
           console.log($scope.todos);
@@ -28,7 +28,7 @@ function ($scope, $stateParams, TodoService) {
     }
 
     $scope.addTodo = function() {
-    TodoService.addTodo($scope.input)
+    UsersService.addTodo($scope.input)
     .then(function(result) {
       $scope.input = {};
       // Reload our todos, not super cool
@@ -37,7 +37,7 @@ function ($scope, $stateParams, TodoService) {
     }
 
     $scope.deleteTodo = function(id) {
-    TodoService.deleteTodo(id)
+    UsersService.deleteTodo(id)
     .then(function (result) {
       // Reload our todos, not super cool
       getAllTodos();
@@ -46,6 +46,70 @@ function ($scope, $stateParams, TodoService) {
 
     getAllTodos();
 
+  //   $scope.books = {
+  //   '0': {
+  //     'id': '234',
+  //     'title': 'Bullshit',
+  //     'author': 'abe lincoln',
+  //     'genre': 'fiction',
+  //     'isbn': '23214234325',
+  //     'type': 'need',
+  //     'description': "This is a really long description that really cannot be displayed completely on the page because it is pretty long."
+  //   },
+  //   '1': {
+  //     'id': '12',
+  //     'title': 'Some Title',
+  //     'author': 'frank q.',
+  //     'genre': 'non-fiction',
+  //     'isbn': '3452345342523',
+  //     'type': 'have',
+  //     'description': "This is a really long description that really cannot be displayed completely on the page because it is pretty long."
+  //   },
+  //   '2': {
+  //     'id': '45',
+  //     'title': 'Suicide',
+  //     'author': 'Sean Ginger',
+  //     'genre': 'non-fiction',
+  //     'isbn': '4563564654',
+  //     'type': 'have',
+  //     'description': "This is a really long description that really cannot be displayed completely on the page because it is pretty long."
+  //   },
+  //   '3': {
+  //     'id': '88',
+  //     'title': 'Gone with the racism',
+  //     'author': 'Nigger Joe',
+  //     'genre': 'non-fiction',
+  //     'isbn': '98765678654',
+  //     'type': 'need',
+  //     'description': "This is a really long description that really cannot be displayed completely on the page because it is pretty long."
+  //   }
+  // };
+
+  // $scope.showOnlyNeed = function(){
+  //   _.each($scope.books , function(book){
+  //       if(book.type == 'need'){
+  //           $('#dashboard-list-item' + book.id).show();
+  //       }
+  //       if (book.type == 'have'){
+  //           $('#dashboard-list-item' + book.id).hide();
+  //       }
+  //   });
+  // }
+
+  // $scope.showOnlyHave = function(){
+  //   _.each($scope.books , function(book){
+  //       if(book.type == 'have'){
+  //           $('#dashboard-list-item' + book.id).show();
+  //       }
+  //       if (book.type == 'need'){
+  //           $('#dashboard-list-item' + book.id).hide();
+  //       }
+  //   });
+  // }
+
+  // console.log(Object.keys($scope.books).length);
+
+  // showOnlyNeed();
 
 })
    
