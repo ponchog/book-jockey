@@ -5,13 +5,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services','uiGmapgoogle-maps','googlemaps.init',])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services','uiGmapgoogle-maps','googlemaps.init','backand'])
 
-.config(function($ionicConfigProvider, $sceDelegateProvider){
+.config(function($ionicConfigProvider, $sceDelegateProvider, BackandProvider){
   
-
   $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
-
+  BackandProvider.setAppName('bookjockey'); // change here to your app name
+  BackandProvider.setSignUpToken('3d661a2a-f9f3-45aa-8130-e2c13f7d402a');
+  BackandProvider.setAnonymousToken('d276634e-a1dd-43a5-b7dc-ddf9ac474ae5'); // token is for anonymous login. see http://docs.backand.com/en/latest/apidocs/security/index.html#anonymous-access
 })
 
 .run(function($ionicPlatform) {

@@ -8,13 +8,46 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('dashboardCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('dashboardCtrl', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, TodoService) {
+    console.log('He!');
+    console.log(TodoService);
+
+    $scope.todos = [];
+    $scope.input = {};
+
+    function getAllTodos() {
+        console.log('1');
+        TodoService.getTodos()
+        .then(function (result) {
+          $scope.todos = result.data.data;
+          console.log($scope.todos);
+        });
+    }
+
+    $scope.addTodo = function() {
+    TodoService.addTodo($scope.input)
+    .then(function(result) {
+      $scope.input = {};
+      // Reload our todos, not super cool
+      getAllTodos();
+    });
+    }
+
+    $scope.deleteTodo = function(id) {
+    TodoService.deleteTodo(id)
+    .then(function (result) {
+      // Reload our todos, not super cool
+      getAllTodos();
+    });
+    }
+
+    getAllTodos();
 
 
-}])
+})
    
 .controller('userDetailCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
