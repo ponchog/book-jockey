@@ -4,25 +4,25 @@
     <form class="list">
       <ion-item class="item-thumbnail-left">
         <img src="{{book.img_path}}">        
-        <span style="font-size:18px;" class="item-text-wrap">Syper long name namenamenamenamenamenamenamenamenamename</span>
+        <span style="font-size:18px;" class="item-text-wrap">{{book.title}}</span>
         <p>
             {{book.author}}        
         </p>
       </ion-item>     
       <label class="item item-input">
-        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+        <span class="input-label">Publisher:</span><textarea placeholder="">{{book.publisher}}</textarea></label>
       <label class="item item-input">
-        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+        <span class="input-label">Edition:</span><textarea placeholder="">{{book.edition}}</textarea></label>
       <label class="item item-input">
-        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+        <span class="input-label">Year:</span><textarea placeholder="">{{book.year}}</textarea></label>
       <label class="item item-input">
-        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+        <span class="input-label">Genre:</span><textarea placeholder="">{{book.genre}}</textarea></label>
       <label class="item item-input">
-        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+        <span class="input-label">Description:</span><textarea placeholder="">{{book.description}}</textarea></label>
     </form>
     <div class="button-bar">
-      <button class="button button-positive  button-block" style="font-size:14px;">I have this book</button>
-      <button class="button button-assertive  button-block" style="font-size:14px;">I need this book</button>
+      <button ng-click="haveBook()" class="button button-positive  button-block" style="font-size:14px;">I have this book</button>
+      <button ng-click="needBook()" class="button button-assertive  button-block" style="font-size:14px;">I need this book</button>
 
     </div>
   </ion-content>

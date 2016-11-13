@@ -152,7 +152,6 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
 
 .controller('bookInfoCtrl',
 function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
-    console.log('heeeey');
     $scope.bookObjName = 'books';
     $scope.book = [];    
     $scope.getBook = function(id, obj) {    
@@ -188,6 +187,23 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
                 }
              },
         });
+    }
+
+    $scope.addToHave = function(id){
+
+    }
+    $scope.addToHave = function(id){
+
+    }
+  
+    $scope.haveBook = function(){
+      $scope.addToHave($scope.book.id);
+      $state.go('tabsController.bookDetail', {bookId: $scope.book.id, viewMode: 1});
+    }
+
+    $scope.needBook = function(){
+      $scope.addToHave($scope.book.id);
+      $state.go('tabsController.bookDetail', {bookId: $scope.book.id, viewMode: 2});
     }
 
     $scope.getBook($stateParams.bookId, $scope.bookObjName);
