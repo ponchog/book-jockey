@@ -2,15 +2,15 @@
   <ion-content padding="true" class="has-header">
     <div id="bookInfo-container5">
       <ion-list id="bookInfo-list17">
-        <ion-item class="item-thumbnail-left item-icon-right" id="bookInfo-list-item10">
+        <ion-item class="item-thumbnail-left item-icon-right" id="bookDetail-list-item10">
           <img src="{{book.img_path}}">
-          <h2>{{book}}</h2>
+          <h2>{{book.title}}</h2>
           <p>
             {{book.author}}
             <br>
             {{book.publisher}}
             <br>
-            {{book.isbn}}
+            <b>ISBN:</b> {{book.isbn}}
           </p>
           <!-- <p></p> -->
           <!-- <i class="icon ion-plus-circled"></i> -->
