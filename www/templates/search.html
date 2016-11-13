@@ -9,7 +9,7 @@
       <!-- <button id="search-button16" class="button button-positive  button-block"  ng-click="scan()">Scan</button> -->
     </form>
     <div ng-repeat="book in books">
-      <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item{{book.id}}" ui-sref="tabsController.bookInfo({bookId: book.book.id})">
+      <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item{{book.id}}" ui-sref="tabsController.bookInfo({bookId: book.id})">
         <img src="{{book.img_path}}">
         <h2>{{book.title}}</h2>
         <p style="white-space:normal;">{{book.author}}</p>

@@ -1,32 +1,33 @@
 <ion-view title="Book Info" id="page11">
   <ion-content padding="true" class="has-header">
-    <div id="bookInfo-container5">
-      <ion-list id="bookInfo-list17">
-        <ion-item class="item-thumbnail-left item-icon-right" id="bookDetail-list-item10">
-          <img src="{{book.img_path}}">
-          <h2>{{book.title}}</h2>
-          <p>
-            {{book.author}}
-            <br>
-            {{book.publisher}}
-            <br>
-            <b>ISBN:</b> {{book.isbn}}
-          </p>
-          <!-- <p></p> -->
-          <!-- <i class="icon ion-plus-circled"></i> -->
-        </ion-item>
-      </ion-list>
+
+    <form class="list">
+      <ion-item class="item-thumbnail-left">
+        <img src="{{book.img_path}}">        
+        <span style="font-size:18px;" class="item-text-wrap">Syper long name namenamenamenamenamenamenamenamenamename</span>
+        <p>
+            {{book.author}}        
+        </p>
+      </ion-item>     
+      <label class="item item-input">
+        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+      <label class="item item-input">
+        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+      <label class="item item-input">
+        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+      <label class="item item-input">
+        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+      <label class="item item-input">
+        <span class="input-label">Text</span><textarea placeholder=""></textarea></label>
+    </form>
+    <div class="button-bar">
+      <button class="button button-positive  button-block" style="font-size:14px;">I have this book</button>
+      <button class="button button-assertive  button-block" style="font-size:14px;">I need this book</button>
+
     </div>
-    <ion-item class="item-divider">{{subHeaderMessage}}</ion-item>
-    <ion-list id="bookInfo-list9">
-      <div ng-repeat="user in book.users | filter: {type: '2'}">
-        <ion-item id="bookInfo-list-item14" ng-click="show(user.user.first_name, user.user.id)">{{user.user.first_name}} {{user.user.last_name}}
-          <span class="item-note">3.2 miles</span>
-        </ion-item>
-        <!-- <ion-item id="bookInfo-list-item14" ui-sref="tabsController.userDetail">{{user.user.first_name}} {{user.user.last_name}}
-          <span class="item-note">3.2 miles</span>
-        </ion-item>         -->
-      </div>
-    </ion-list>
   </ion-content>
 </ion-view>
+
+
+
+
