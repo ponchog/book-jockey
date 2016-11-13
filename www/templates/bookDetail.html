@@ -20,13 +20,13 @@
     
     <ion-list id="bookDetail-list9">
       <div ng-repeat="user in book.users | filter: {type: '2'}">
-        <ion-item id="bookDetail-list-item14" ui-sref="tabsController.userDetail">{{user.user.first_name}} {{user.user.first_name}}
+        <ion-item id="bookDetail-list-item14" ui-sref="tabsController.userDetail">{{user.user.first_name}} {{user.user.last_name}}
           <span class="item-note">3.2 miles</span>
         </ion-item>
         <!-- <ion-item id="bookDetail-list-item14" ui-sref="tabsController.userDetail">{{user.user.first_name}} {{user.user.last_name}}
           <span class="item-note">3.2 miles</span>
         </ion-item>         -->
       </div>
-    </ion-list>    
+    </ion-list>
   </ion-content>
 </ion-view>
