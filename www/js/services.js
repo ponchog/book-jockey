@@ -92,6 +92,10 @@ angular.module('app.services', [])
 	    });
 	};
 
+	addUserBook = function(obj, userBook) {
+		return $http.post(getUrl(obj), userBook);
+	};
+
 	// getTodos = function () {
 	// return $http.get(getUrl());
 	// };
@@ -112,7 +116,8 @@ angular.module('app.services', [])
 	getBook: getBook,
 	getBooksByIsbn: getBooksByIsbn,
 	getBooksByAuthor: getBooksByAuthor,
-	getBooksByTitle: getBooksByTitle
+	getBooksByTitle: getBooksByTitle,
+	addUserBook: addUserBook
 
 	}
 });

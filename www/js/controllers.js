@@ -164,6 +164,7 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
 .controller('bookInfoCtrl',
 function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     $scope.bookObjName = 'books';
+    $scope.userBookObjName = 'user_books';
     $scope.book = [];    
     $scope.getBook = function(id, obj) {    
         UsersService.getBook(id, obj)
@@ -200,21 +201,20 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
         });
     }
 
-    $scope.addToHave = function(id){
-
-    }
-    $scope.addToHave = function(id){
-
+    $scope.addUserBook = function(obj, userbook){
+        UsersService.addUserBook(obj, userbook);
     }
   
     $scope.haveBook = function(){
-      $scope.addToHave($scope.book.id);
-      $state.go('tabsController.bookDetail', {bookId: $scope.book.id, viewMode: 1});
+      var userBook = {"type": 2,"deleted_at": "","created_at": "","condition": "1","user": 54,"book": $scope.book.id};
+      $scope.addUserBook($scope.userBookObjName, userBook);
+      $state.go('tabsController.bookDetail', {bookId: $scope.book.id, viewMode: 2});
     }
 
     $scope.needBook = function(){
-      $scope.addToHave($scope.book.id);
-      $state.go('tabsController.bookDetail', {bookId: $scope.book.id, viewMode: 2});
+      var userBook = {"type": 1,"deleted_at": "","created_at": "","condition": "1","user": 54,"book": $scope.book.id};
+      $scope.addUserBook($scope.userBookObjName, userBook);
+      $state.go('tabsController.bookDetail', {bookId: $scope.book.id, viewMode: 1});
     }
 
     $scope.getBook($stateParams.bookId, $scope.bookObjName);
