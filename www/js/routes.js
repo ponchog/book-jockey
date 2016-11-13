@@ -117,7 +117,7 @@ angular.module('app.routes', ['ionicUIRouter'])
         'tab1': {
           templateUrl: 'templates/bookDetail.html',
           controller: 'bookDetailCtrl',
-          params: ['bookId', 'type']          
+          params: ['bookId', 'type']
         },
         // 'tab4': {
         //   templateUrl: 'templates/bookDetail.html',
