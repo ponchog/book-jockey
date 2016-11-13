@@ -114,7 +114,7 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
         UsersService.getBook(id, obj)
             .then(function (result) {
                 $scope.book = result.data;
-                console.log($scope.book);                
+                console.log($scope.book);
             });
     };
 
@@ -143,6 +143,19 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
                 }
              },
         });
+    }
+
+    $scope.getRandomNumber = function(limit){      
+      return Math.floor((Math.random() * limit) + 1);
+    }
+
+    // Random float between
+    $scope.randomFloatBetween = function(minValue,maxValue,precision){
+      console.log(minValue,maxValue,precision);
+      if(typeof(precision) == 'undefined'){
+          precision = 1;
+      }
+      return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)),maxValue).toFixed(precision));
     }
 
     $scope.getBook($stateParams.bookId, $scope.bookObjName);
