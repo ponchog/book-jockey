@@ -45,9 +45,6 @@ function ($scope, $stateParams, UsersService) {
                 }).catch(function(e){
                     // handle errors in processing or in error.
                 });
-
-            
-
     }
 
     $scope.showBooksNeed = function(){
@@ -104,24 +101,100 @@ function ($scope, $stateParams, UsersService) {
 .controller('bookDetailCtrl',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, UsersService) {    
-    $scope.userObjName = 'books';
-    $scope.book = [];
+function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
+    $scope.bookObjName = 'books';
+    $scope.book = [];    
+    $scope.viewMode = $stateParams.viewMode;
+    $scope.subHeaderMessage = $scope.viewMode == 1 ? 'People nearby with the book you look for' : 'People nearby looking for this book';    
+    $scope.actionButtonText = $scope.viewMode == 1 ? 'Get the book!' : 'Offer the book!';
 
-    console.log('test');
-    console.log($stateParams.bookId);
+    
 
     $scope.getBook = function(id, obj) {    
         UsersService.getBook(id, obj)
             .then(function (result) {
                 $scope.book = result.data;
-                console.log($scope.book);
-                
+                console.log($scope.book);                
             });
     };
 
-    $scope.getBook($stateParams.bookId, $scope.userObjName);
+     // Triggered on a button click, or some other target
+    $scope.show = function(userFirstName, userId) {
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: '<b>' + $scope.actionButtonText + '</b>' },
+                { text: 'View ' + userFirstName + "'s Profile" }
+            ],
+            cancelText: 'Cancel',
+            cancel: function() {
+                // add cancel code..
+                },
+            buttonClicked: function(index) {
+                //Request
+                if(index === 0) {
+                    console.log()
+                    $state.go('tabsController.request');
+                }
+                    
+                //View Profile
+                if(index === 1) {
+                   console.log('2')
+                }
+             },
+        });
+    }
 
+    $scope.getBook($stateParams.bookId, $scope.bookObjName);
+    
+
+})
+
+.controller('bookInfoCtrl',
+function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
+    console.log('heeeey');
+    $scope.bookObjName = 'books';
+    $scope.book = [];    
+    $scope.subHeaderMessage = $scope.viewMode == 1 ? 'People nearby with the book you look for' : 'People nearby looking for this book';
+    $scope.actionButtonText = $scope.viewMode == 1 ? 'Get the book!' : 'Offer the book!';
+
+    $scope.getBook = function(id, obj) {    
+        UsersService.getBook(id, obj)
+            .then(function (result) {
+                $scope.book = result.data;
+                console.log($scope.book);                
+            });
+    };
+
+     // Triggered on a button click, or some other target
+    $scope.show = function(userFirstName, userId) {
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: '<b>' + $scope.actionButtonText + '</b>' },
+                { text: 'View ' + userFirstName + "'s Profile" }
+            ],
+            cancelText: 'Cancel',
+            cancel: function() {
+                // add cancel code..
+                },
+            buttonClicked: function(index) {
+                //Request
+                if(index === 0) {
+                    console.log()
+                    $state.go('tabsController.request');
+                }
+                    
+                //View Profile
+                if(index === 1) {
+                   console.log('2')
+                }
+             },
+        });
+    }
+
+    $scope.getBook($stateParams.bookId, $scope.bookObjName);
+    
 
 })
    
@@ -218,11 +291,53 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('searchCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('searchCtrl', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, UsersService) {
+    $scope.bookObjName = 'books';
+    //950553147113
+
+    $scope.getBookByIsbn = function(obj, isbn) {        
+        UsersService.getBookByIsbn(obj, isbn)
+            .then(function (result) {
+                $scope.books = result.data.data;
+                console.log($scope.books);
+            }).catch(function(e){
+                   console.log("got an error in initial processing",e);
+                   throw e;
+                }).then(function(res){
+                    // do more stuff
+                }).catch(function(e){
+                    // handle errors in processing or in error.
+                });
+    }
+
+    $scope.search = function (searchTxt){
+        // Todo - Show loading animation        
+        $scope.getBookByIsbn($scope.bookObjName, searchTxt);
+    }
+
+    // $scope.scan = function(){
+    //     console.log('Scan');
+    //     $ionicPlatform.ready(function() {
+    //         $cordovaBarcodeScanner
+    //             .scan()
+    //             .then(function(result) {
+    //                 // Success! Barcode data is here
+    //                 $scope.scanResults = "We got a barcode\n" +
+    //                 "Result: " + result.text + "\n" +
+    //                 "Format: " + result.format + "\n" +
+    //                 "Cancelled: " + result.cancelled;
+    //             }, function(error) {
+    //                 // An error occurred
+    //                 $scope.scanResults = 'Error: ' + error;
+    //             });
+    //     });
+    // };
+
+    $scope.scanResults = '';
 
 
-}])
+})
  

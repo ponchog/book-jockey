@@ -3,25 +3,26 @@
     <form id="search-form13" class="list">
       <label class="item item-input" id="search-search1">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="search" placeholder="Search by isbn, author or title">
+        <input type="search" placeholder="Search by isbn, author or title" ng-model="searchTxt">
       </label>
-      <button id="search-button15" class="button button-positive  button-block">Search</button>
+      <button id="search-button15" class="button button-positive  button-block" ng-click="search(searchTxt)">Search</button>
+      <!-- <button id="search-button16" class="button button-positive  button-block"  ng-click="scan()">Scan</button> -->
     </form>
-    <ion-list id="search-list13">
+    <div ng-repeat="book in books">
+      <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item{{book.id}}" ui-sref="tabsController.bookInfo({bookId: book.book.id})">
+        <img src="{{book.img_path}}">
+        <h2>{{book.title}}</h2>
+        <p style="white-space:normal;">{{book.author}}</p>
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+    </div>            
+    
+    <!-- <ion-list id="search-list13">
       <ion-list id="search-list14">
         <ion-item class="item-thumbnail-left" id="search-list-item42" ui-sref="tabsController.bookDetail">
           <h2>Item</h2>
         </ion-item>
-        <ion-item class="item-thumbnail-left" id="search-list-item43">
-          <h2>Item</h2>
-        </ion-item>
-        <ion-item class="item-thumbnail-left" id="search-list-item44">
-          <h2>Item</h2>
-        </ion-item>
-        <ion-item class="item-thumbnail-left" id="search-list-item45">
-          <h2>Item</h2>
-        </ion-item>
       </ion-list>
-    </ion-list>
+    </ion-list> -->
   </ion-content>
 </ion-view>

@@ -28,7 +28,6 @@ angular.module('app.services', [])
 	    });	    
 	 };
 
-
 	getBook = function(id, obj) {
 		return $http({
 	      method: 'GET',
@@ -41,6 +40,24 @@ angular.module('app.services', [])
 	    });
 	};
 
+	getBookByIsbn = function(obj, isbn) {
+		console.log(isbn);
+		return $http({
+	      method: 'GET',
+	      url: getUrl(obj),
+	      params: {	       	
+	       	filter: [
+	       		{
+					fieldName: 'isbn',
+					operator: 'equals',
+					value: '950553147113'
+				}
+			],
+	      }
+	    }).then(function(response) {
+			return response;
+	    });
+	};
 
 
 	// getTodos = function () {
@@ -60,7 +77,8 @@ angular.module('app.services', [])
 	// addTodo: addTodo,
 	// deleteTodo: deleteTodo,
 	getUser: getUser,
-	getBook, getBook,
+	getBook: getBook,
+	getBookByIsbn: getBookByIsbn
 
 	}
 });

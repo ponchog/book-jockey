@@ -1,10 +1,10 @@
-<ion-view title="Book Detail" id="page11">
+<ion-view title="Book Info" id="page11">
   <ion-content padding="true" class="has-header">
-    <div id="bookDetail-container5">
-      <ion-list id="bookDetail-list17">
-        <ion-item class="item-thumbnail-left item-icon-right" id="bookDetail-list-item10">
+    <div id="bookInfo-container5">
+      <ion-list id="bookInfo-list17">
+        <ion-item class="item-thumbnail-left item-icon-right" id="bookInfo-list-item10">
           <img src="{{book.img_path}}">
-          <h2>{{book.title}}</h2>
+          <h2>{{book}}</h2>
           <p>
             {{book.author}}
             <br>
@@ -18,12 +18,12 @@
       </ion-list>
     </div>
     <ion-item class="item-divider">{{subHeaderMessage}}</ion-item>
-    <ion-list id="bookDetail-list9">
+    <ion-list id="bookInfo-list9">
       <div ng-repeat="user in book.users | filter: {type: '2'}">
-        <ion-item id="bookDetail-list-item14" ng-click="show(user.user.first_name, user.user.id)">{{user.user.first_name}} {{user.user.last_name}}
+        <ion-item id="bookInfo-list-item14" ng-click="show(user.user.first_name, user.user.id)">{{user.user.first_name}} {{user.user.last_name}}
           <span class="item-note">3.2 miles</span>
         </ion-item>
-        <!-- <ion-item id="bookDetail-list-item14" ui-sref="tabsController.userDetail">{{user.user.first_name}} {{user.user.last_name}}
+        <!-- <ion-item id="bookInfo-list-item14" ui-sref="tabsController.userDetail">{{user.user.first_name}} {{user.user.last_name}}
           <span class="item-note">3.2 miles</span>
         </ion-item>         -->
       </div>
