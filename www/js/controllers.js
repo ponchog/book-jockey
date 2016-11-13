@@ -166,9 +166,6 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     console.log('heeeey');
     $scope.bookObjName = 'books';
     $scope.book = [];    
-    $scope.subHeaderMessage = $scope.viewMode == 1 ? 'People nearby with the book you look for' : 'People nearby looking for this book';
-    $scope.actionButtonText = $scope.viewMode == 1 ? 'Get the book!' : 'Offer the book!';    
-
     $scope.getBook = function(id, obj) {    
         UsersService.getBook(id, obj)
             .then(function (result) {
