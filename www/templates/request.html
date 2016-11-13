@@ -1,21 +1,44 @@
 <ion-view title="Request" id="page14">
   <ion-content padding="true" class="has-header">
-    <h1 id="request-heading1" style="color:#000000;">I wanna...</h1>
+    <ion-item class="item-divider">{{subHeaderMessage}} {{user.first_name}}</ion-item>
+    <ion-list id="bookDetail-list17">
+      <ion-item class="item-thumbnail-left item-icon-right" id="bookDetail-list-item10">
+        <img src="{{book.img_path}}">
+        <h2>{{book.title}}</h2>
+        <p>
+          {{book.author}}
+          <br>
+          {{book.publisher}}
+          <br>
+          <b>ISBN:</b> {{book.isbn}}
+        </p>
+        <!-- <p></p> -->
+        <!-- <i class="icon ion-plus-circled"></i> -->
+      </ion-item>
+    </ion-list>    
     <form id="request-form8" class="list">
-      <ion-radio id="request-radio5">Make an offer</ion-radio>
-      <ion-radio id="request-radio4">Borrow</ion-radio>
+      <div ng-if="viewMode == TYPE_NEED">
+        <ion-item class="item-divider">Select an option</ion-item>      
+        <ion-radio id="request-radio5">Make an offer</ion-radio>
+        <ion-radio id="request-radio4">Borrow</ion-radio>
+        <label class="item item-input" id="request-input9">
+          <span class="input-label">$</span>
+          <input type="number" placeholder="Offer amount">
+        </label>
+      </div>
+
+      <div ng-if="viewMode == TYPE_HAVE">                
+        <label class="item item-input" id="request-input9">
+          <span class="input-label">$</span>
+          <input type="number" placeholder="Asking price">
+        </label>
+      </div>
     </form>
-    <div class="spacer" style="width: 300px; height: 43px;"></div>
-    <form id="request-form10" class="list">
-      <label class="item item-input" id="request-input9">
-        <span class="input-label">$</span>
-        <input type="number" placeholder="Offer">
-      </label>
-    </form>
+        
     <form id="request-form16" class="list">
       <label class="item item-input" id="request-textarea4">
         <span class="input-label"></span><textarea placeholder="Write a message"></textarea></label>
     </form>
-    <button id="request-button14" class="button button-positive  button-block">Send</button>    
+    <button id="request-button14" class="button button-positive button-block" ng-click="sendMessage()">Send</button>    
   </ion-content>
 </ion-view>

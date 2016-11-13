@@ -161,16 +161,17 @@ angular.module('app.routes', ['ionicUIRouter'])
         /page1/tab4/request
     */
     .state('tabsController.request', {
-      url: '/request',
+      url: '/request/:bookId?userId?requestType',
       views: {
         'tab1': {
           templateUrl: 'templates/request.html',
-          controller: 'requestCtrl'
+          controller: 'requestCtrl',
+          params: ['bookId', 'userId', 'requestType']
         },
-        'tab4': {
-          templateUrl: 'templates/request.html',
-          controller: 'requestCtrl'
-        }
+        // 'tab4': {
+        //   templateUrl: 'templates/request.html',
+        //   controller: 'requestCtrl'
+        // }
       }
     })
 

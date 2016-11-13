@@ -26,7 +26,7 @@ function ($scope, $stateParams, UsersService) {
         UsersService.getUser(id, obj)
             .then(function (result) {
                 $scope.user = result.data;
-                console.log($scope.user);
+                console.log($scope.user.books);
 
                 angular.forEach($scope.user.books, function(book) {
                     if(book.type == 1){
@@ -108,21 +108,21 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     $scope.subHeaderMessage = $scope.viewMode == 1 ? 'People nearby with the book you seek' : 'People nearby looking for this book';    
     $scope.actionButtonText = $scope.viewMode == 1 ? 'Get the book!' : 'Offer the book!';
 
-    
-
-    $scope.getBook = function(id, obj) {    
+    $scope.getBook = function(id, obj) {
         UsersService.getBook(id, obj)
             .then(function (result) {
-                $scope.book = result.data;                
+                $scope.book = result.data;
 
                 angular.forEach($scope.book.users, function(user) {
-                  user.user.miles = $scope.randomFloatBetween(0.1, 5, 1);                  
+                  user.user.miles = $scope.randomFloatBetween(0.1, 5, 1);
+                  console.log(user);
                 });
             });
     };
 
      // Triggered on a button click, or some other target
-    $scope.show = function(userFirstName, userId) {
+    $scope.show = function(userFirstName, userId, book) {
+      console.log(book);
         // Show the action sheet
         var hideSheet = $ionicActionSheet.show({
             buttons: [
@@ -136,8 +136,8 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
             buttonClicked: function(index) {
                 //Request
                 if(index === 0) {
-                    console.log()
-                    $state.go('tabsController.request');
+                    // $state.go('tabsController.request');
+                    $state.go('tabsController.request', {bookId: book.id, userId: userId, requestType: $scope.viewMode});
                 }
                     
                 //View Profile
@@ -166,7 +166,7 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     console.log('heeeey');
     $scope.bookObjName = 'books';
     $scope.book = [];    
-    $scope.getBook = function(id, obj) {    
+    $scope.getBook = function(id, obj) {
         UsersService.getBook(id, obj)
             .then(function (result) {
                 $scope.book = result.data;
@@ -188,8 +188,7 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
                 },
             buttonClicked: function(index) {
                 //Request
-                if(index === 0) {
-                    console.log()
+                if(index === 0) {                    
                     $state.go('tabsController.request');
                 }
                     
@@ -203,6 +202,50 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
 
     $scope.getBook($stateParams.bookId, $scope.bookObjName);
     
+
+})
+
+.controller('requestCtrl', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  // You can include any angular dependencies as parameters for this function
+  // TIP: Access Route Parameters for your page via $stateParams.parameterName
+  function ($scope, $stateParams, UsersService) {
+    $scope.bookObjName = 'books';
+    $scope.userObjName = 'users';
+    $scope.TYPE_NEED = 1;
+    $scope.TYPE_HAVE = 2;
+    $scope.viewMode = $stateParams.requestType;
+    $scope.userId = $stateParams.userId;
+
+    $scope.subHeaderMessage = $scope.viewMode == 1 ? 'Make offer to ' : 'Offer Book to ';
+
+    $scope.getBook = function(id, obj) {
+      UsersService.getBook(id, obj)
+          .then(function (result) {
+              $scope.book = result.data;              
+          });
+    };
+
+    $scope.getUser = function(id, obj) {
+        UsersService.getUser(id, obj)
+            .then(function (result) {
+                $scope.user = result.data;
+                console.log($scope.user.books);
+            });
+    }
+
+    $scope.sendMessage = function () {
+      //Todo - Frank
+    }
+
+    
+    $scope.getBook($stateParams.bookId, $scope.bookObjName);
+    $scope.getUser($scope.userId, $scope.userObjName);
+
+
+    // params: ['bookId', 'bookAuthor', 'bookImg', 'bookTitle']
+
+
+
 
 })
    
@@ -291,13 +334,7 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('requestCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
 
-
-}])
    
 .controller('searchCtrl', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
