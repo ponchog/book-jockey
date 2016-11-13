@@ -4,82 +4,63 @@ angular.module('app.services', [])
 
 }])
 
-// .service('BlankService', [function(){
-
-// }])
-
-// .service('APIInterceptor', function ($rootScope, $q) {
-//     var service = this;
-
-//     service.responseError = function (response) {
-//         if (response.status === 401) {
-//             $rootScope.$broadcast('unauthorized');
-//         }
-//         return $q.reject(response);
-//     };
-// })
-
-// .service('UsersModel', [function ($http, Backand) {
-//     var service = this,
-//         baseUrl = '/1/objects/',
-//         objectName = 'users/';
-
-//     function getUrl() {
-//         return Backand.getApiUrl() + baseUrl + objectName;
-//     }
-
-//     function getUrlForId(id) {
-//         return getUrl() + id;
-//     }
-
-//     service.all = function () {
-//         return $http.get(getUrl());
-//     };
-
-//     service.fetch = function (id) {
-//         return $http.get(getUrlForId(id));
-//     };
-
-//     service.create = function (object) {
-//         return $http.post(getUrl(), object);
-//     };
-
-//     service.update = function (id, object) {
-//         return $http.put(getUrlForId(id), object);
-//     };
-
-//     service.delete = function (id) {
-//         return $http.delete(getUrlForId(id));
-//     };
-// }])
-
 .service('UsersService', function ($http, Backand) {
-  var baseUrl = '/1/objects/';
-  var objectName = 'users/';
- 
-  function getUrl() {
-    return Backand.getApiUrl() + baseUrl + objectName;
-  }
- 
-  function getUrlForId(id) {
-    return getUrl() + id;
-  }
- 
-  getTodos = function () {
-    return $http.get(getUrl());
-  };
- 
-  addTodo = function(todo) {
-    return $http.post(getUrl(), todo);
-  }
- 
-  deleteTodo = function (id) {
-    return $http.delete(getUrlForId(id));
-  };
- 
-  return {
-    getTodos: getTodos,
-    addTodo: addTodo,
-    deleteTodo: deleteTodo
-  }
+	var baseUrl = '/1/objects/';	
+	// var userObjName = 'users/';
+
+	function getUrl(obj) {
+		return Backand.getApiUrl() + baseUrl + obj + '/';
+	}
+
+	function getUrlForId(id) {
+		return getUrl() + id;
+	}
+
+	getUser = function (id, obj) {
+	    return $http({
+	      method: 'GET',
+	      url: getUrl(obj) + id,
+	      params: {
+	       	deep: true // to get the related user objects
+	      }
+	    }).then(function(response) {
+			return response;
+	    });	    
+	 };
+
+
+	getBook = function(id, obj) {
+		return $http({
+	      method: 'GET',
+	      url: getUrl(obj) + id,
+	      params: {
+	       	deep: true // to get the related user objects
+	      }
+	    }).then(function(response) {
+			return response;
+	    });
+	};
+
+
+
+	// getTodos = function () {
+	// return $http.get(getUrl());
+	// };
+
+	// addTodo = function(todo) {
+	// return $http.post(getUrl(), todo);
+	// };
+
+	// deleteTodo = function (id) {
+	// return $http.delete(getUrlForId(id));
+	// };
+
+	return {
+	// getTodos: getTodos,
+	// addTodo: addTodo,
+	// deleteTodo: deleteTodo,
+	getUser: getUser,
+	getBook, getBook,
+
+	}
 });

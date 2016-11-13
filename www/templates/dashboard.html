@@ -2,22 +2,25 @@
   <ion-content padding="false" class="has-header">
     <ion-list id="dashboard-list3">
       <ion-item class="item-icon-left">
-        <i class="icon ion-ionic"></i>Frank Q
-        <span class="item-note">Test</span>
+        <i class="icon ion-person"></i>{{user.first_name}} {{user.last_name}}
+        <span class="item-note">Edit</span>
       </ion-item>
     </ion-list>
     <div id="dashboard-button-bar1" class="button-bar">
-      <button id="dashboard-need-btn" ng-click="showOnlyNeed()" style="background-color:#84b3ff;border-radius:0px 0px 0px 0px;" class="button button-positive">Need</button>
-      <button id="dashboard-have-btn" ng-click="showOnlyHave()" style="border-radius:0px 0px 0px 0px;" class="button button-positive">Have</button>
+      <button id="dashboard-need-btn" ng-click="showBooksNeed()" style="border-radius:0px 0px 0px 0px;" class="button button-positive">Need ({{countBooksNeed}})</button>
+      <button id="dashboard-have-btn" ng-click="showBooksHave()" style="border-radius:0px 0px 0px 0px;" class="button button-positive">Have ({{countBooksHave}})</button>
     </div>
     <ion-list id="dashboard-list2">
-      <div ng-repeat="book in books">
-        <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item{{book.id}}" ui-sref="tabsController.bookDetail">
-          <h2>{{book.title}}</h2>
-          <p style="white-space:normal;">{{book.author}}</p>
+      <div ng-repeat="book in user.books | filter: {type: activeType}">
+        <ion-item class="item-thumbnail-left item-icon-right" id="dashboard-list-item{{book.id}}" ui-sref="tabsController.bookDetail({bookId: book.book.id})">
+          <img src="{{book.book.img_path}}">
+          <h2>{{book.book.title}} {{book.type}}</h2>
+          <p style="white-space:normal;">{{book.book.author}}</p>
           <i class="icon ion-ios-book"></i>
         </ion-item>
       </div>
+      <button ng-if="countBooksNeed == 0 && activeType == TYPE_NEED" class="button button-assertive  button-block button-clear icon ion-android-add-circle" ui-sref="tabsController.search">Need a book!</button>
+      <button ng-if="countBooksHave == 0 && activeType == TYPE_HAVE" class="button button-assertive  button-block button-clear icon ion-android-add-circle" ui-sref="tabsController.search">Have a book!</button>
     </ion-list>
   </ion-content>
 </ion-view>
