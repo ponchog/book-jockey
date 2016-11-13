@@ -21,7 +21,7 @@
     <ion-list id="bookDetail-list9">
       <div ng-repeat="user in book.users | filter: {type: '2'}">
         <ion-item id="bookDetail-list-item14" ng-click="show(user.user.first_name, user.user.id)">{{user.user.first_name}} {{user.user.last_name}}
-          <span class="item-note">{{randomFloatBetween(0.1, 5, 1)}} miles</span>
+          <span class="item-note">{{user.user.miles}} miles</span>
         </ion-item>        
       </div>
     </ion-list>

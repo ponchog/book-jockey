@@ -113,8 +113,11 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     $scope.getBook = function(id, obj) {    
         UsersService.getBook(id, obj)
             .then(function (result) {
-                $scope.book = result.data;
-                console.log($scope.book);
+                $scope.book = result.data;                
+
+                angular.forEach($scope.book.users, function(user) {
+                  user.user.miles = $scope.randomFloatBetween(0.1, 5, 1);                  
+                });
             });
     };
 
@@ -145,10 +148,6 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
         });
     }
 
-    $scope.getRandomNumber = function(limit){      
-      return Math.floor((Math.random() * limit) + 1);
-    }
-
     // Random float between
     $scope.randomFloatBetween = function(minValue,maxValue,precision){
       console.log(minValue,maxValue,precision);
@@ -159,7 +158,6 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     }
 
     $scope.getBook($stateParams.bookId, $scope.bookObjName);
-    
 
 })
 
