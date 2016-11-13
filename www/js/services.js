@@ -40,8 +40,7 @@ angular.module('app.services', [])
 	    });
 	};
 
-	getBookByIsbn = function(obj, isbn) {
-		console.log(isbn);
+	getBooksByIsbn = function(obj, value) {
 		return $http({
 	      method: 'GET',
 	      url: getUrl(obj),
@@ -49,8 +48,8 @@ angular.module('app.services', [])
 	       	filter: [
 	       		{
 					fieldName: 'isbn',
-					operator: 'equals',
-					value: '950553147113'
+					operator: 'contains',
+					value: value
 				}
 			],
 	      }
@@ -58,7 +57,40 @@ angular.module('app.services', [])
 			return response;
 	    });
 	};
-
+	getBooksByAuthor = function(obj, value) {
+		return $http({
+	      method: 'GET',
+	      url: getUrl(obj),
+	      params: {	       	
+	       	filter: [
+	       		{
+					fieldName: 'author',
+					operator: 'contains',
+					value: value
+				}
+			],
+	      }
+	    }).then(function(response) {
+			return response;
+	    });
+	};
+	getBooksByTitle = function(obj, value) {
+		return $http({
+	      method: 'GET',
+	      url: getUrl(obj),
+	      params: {	       	
+	       	filter: [
+	       		{
+					fieldName: 'title',
+					operator: 'contains',
+					value: value
+				}
+			],
+	      }
+	    }).then(function(response) {
+			return response;
+	    });
+	};
 
 	// getTodos = function () {
 	// return $http.get(getUrl());
@@ -78,7 +110,9 @@ angular.module('app.services', [])
 	// deleteTodo: deleteTodo,
 	getUser: getUser,
 	getBook: getBook,
-	getBookByIsbn: getBookByIsbn
+	getBooksByIsbn: getBooksByIsbn,
+	getBooksByAuthor: getBooksByAuthor,
+	getBooksByTitle: getBooksByTitle
 
 	}
 });

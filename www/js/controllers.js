@@ -105,7 +105,7 @@ function ($scope, $stateParams, $state, UsersService, $ionicActionSheet) {
     $scope.bookObjName = 'books';
     $scope.book = [];    
     $scope.viewMode = $stateParams.viewMode;
-    $scope.subHeaderMessage = $scope.viewMode == 1 ? 'People nearby with the book you look for' : 'People nearby looking for this book';    
+    $scope.subHeaderMessage = $scope.viewMode == 1 ? 'People nearby with the book you seek' : 'People nearby looking for this book';    
     $scope.actionButtonText = $scope.viewMode == 1 ? 'Get the book!' : 'Offer the book!';
 
     
@@ -297,12 +297,37 @@ function ($scope, $stateParams) {
 function ($scope, $stateParams, UsersService) {
     $scope.bookObjName = 'books';
     //950553147113
-
-    $scope.getBookByIsbn = function(obj, isbn) {        
-        UsersService.getBookByIsbn(obj, isbn)
+    $scope.books = new Array();
+    $scope.addBooksByIsbn = function(obj, value) {        
+        UsersService.getBooksByIsbn(obj, value)
             .then(function (result) {
-                $scope.books = result.data.data;
-                console.log($scope.books);
+                $scope.books = $scope.books.concat(result.data.data);
+            }).catch(function(e){
+                   console.log("got an error in initial processing",e);
+                   throw e;
+                }).then(function(res){
+                    // do more stuff
+                }).catch(function(e){
+                    // handle errors in processing or in error.
+                });
+    }
+    $scope.addBooksByAuthor = function(obj, value) {        
+        UsersService.getBooksByAuthor(obj, value)
+            .then(function (result) {
+                $scope.books = $scope.books.concat(result.data.data);
+            }).catch(function(e){
+                   console.log("got an error in initial processing",e);
+                   throw e;
+                }).then(function(res){
+                    // do more stuff
+                }).catch(function(e){
+                    // handle errors in processing or in error.
+                });
+    }
+    $scope.addBooksByTitle = function(obj, value) {        
+        UsersService.getBooksByTitle(obj, value)
+            .then(function (result) {
+               $scope.books = $scope.books.concat(result.data.data);
             }).catch(function(e){
                    console.log("got an error in initial processing",e);
                    throw e;
@@ -314,8 +339,10 @@ function ($scope, $stateParams, UsersService) {
     }
 
     $scope.search = function (searchTxt){
-        // Todo - Show loading animation        
-        $scope.getBookByIsbn($scope.bookObjName, searchTxt);
+        $scope.books = new Array();   
+        $scope.addBooksByIsbn($scope.bookObjName, searchTxt);
+        $scope.addBooksByTitle($scope.bookObjName, searchTxt);
+        $scope.addBooksByAuthor($scope.bookObjName, searchTxt);
     }
 
     // $scope.scan = function(){
